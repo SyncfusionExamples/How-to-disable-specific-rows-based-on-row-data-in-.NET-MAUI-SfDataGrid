@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:SfDataGridSample"
+             xmlns:converters="clr-namespace:SfDataGridSample.Converters"
+             x:Class="SfDataGridSample.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:OrderInfoRepository x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:RowDisableConverter x:Key="rowDisableConverter"/>
+            <Style TargetType="syncfusion:DataGridRow">
+                <Setter Property="Opacity" Value="{Binding Converter={StaticResource rowDisableConverter}}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <syncfusion:SfDataGrid x:Name="dataGrid" NavigationMode="Cell" SelectionMode="Single" 
+                          AllowEditing="True"
+                          ColumnWidthMode="Auto"
+                          GridLinesVisibility="Both" 
+                          HeaderGridLinesVisibility="Both"
+                          AutoGenerateColumnsMode="None"
+                          ItemsSource="{Binding OrderInfoCollection}">
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:DataGridTextColumn MappingName="OrderID" 
+                                             HeaderText="Order ID" />
+                <syncfusion:DataGridTextColumn MappingName="CustomerID" 
+                                          HeaderText="Customer ID" />
+                <syncfusion:DataGridTextColumn MappingName="ShipCountry" 
+                                          HeaderText="Ship Country"/>
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+    </ContentPage.Content>
+
+
+</ContentPage>
